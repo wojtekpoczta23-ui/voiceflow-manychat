@@ -11,7 +11,7 @@ const VOICEFLOW_PROJECT_ID = process.env.VOICEFLOW_PROJECT_ID || "6a0567b9d8e4b4
 app.post("/voiceflow", async (req, res) => {
   try {
     const userId = req.body.userId || req.body.user_id || "default_user";
-    const userMessage = req.body.userMessage || req.body.last_input_text || "";
+    const userMessage = req.body.userMessage || req.body.message || req.body.last_input_text || "";
     console.log(`📩 Wiadomość od ${userId}: ${userMessage}`);
 
     if (!userMessage) {
