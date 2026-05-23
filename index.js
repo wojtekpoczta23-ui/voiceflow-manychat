@@ -74,7 +74,7 @@ app.post("/voiceflow", async (req, res) => {
 
   } catch (error) {
     console.error("❌ Błąd:", error.response?.data || error.message);
-    res.status(500).json({
+    res.json({
       version: "v2",
       content: {
         messages: [{ type: "text", text: "Wystąpił błąd techniczny. Spróbuj ponownie za chwilę." }],
