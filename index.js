@@ -26,16 +26,16 @@ app.post("/voiceflow", async (req, res) => {
     }
 
     const voiceflowResponse = await axios.post(
-      `https://general-runtime.voiceflow.com/state/user/${userId}/interact`,
-      { action: { type: "text", payload: { message: userMessage } } },
-      {
-        headers: {
-          Authorization: VOICEFLOW_API_KEY,
-          "Content-Type": "application/json",
-          versionID: "main"
-        }
-      }
-    );
+  `https://general-runtime.voiceflow.com/v2beta1/project/${VOICEFLOW_PROJECT_ID}/user/${userId}/interact`,
+  { action: { type: "text", payload: userMessage } },
+  {
+    headers: {
+      Authorization: VOICEFLOW_API_KEY,
+      "Content-Type": "application/json",
+      versionID: "main"
+    }
+  }
+);
 
     const traces = voiceflowResponse.data;
     console.log("📦 Voiceflow traces:", JSON.stringify(traces, null, 2));
