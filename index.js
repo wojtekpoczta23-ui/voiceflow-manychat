@@ -27,7 +27,7 @@ app.post("/voiceflow", async (req, res) => {
 
     const voiceflowResponse = await axios.post(
       `https://general-runtime.voiceflow.com/state/user/${userId}/interact`,
-      { action: { type: "text", payload: userMessage } },
+      { action: { type: "text", payload: { message: userMessage } } },
       {
         headers: {
           Authorization: VOICEFLOW_API_KEY,
