@@ -46,7 +46,14 @@ app.post("/voiceflow", async (req, res) => {
 
     for (const trace of traces) {
       if (trace.type === "text" && trace.payload?.message) {
-        messages.push({ type: "text", text: trace.payload.message, buttons: [] });
+  let text = trace.payload.message
+    .replace(/\*\*/g, "")
+    .replace(/\*/g, "•")
+    .replace(/\\n/g, "\n")
+    .trim();
+  if (text.length > 1000) text = text.substring(0, 997) + "...";
+  console.log("📤 Tekst do ManyChat:", text.substring(0, 200));
+  messages.push({ type: "text", text, buttons: [] });
       } else if (trace.type === "visual" && trace.payload?.image) {
         messages.push({ type: "image", url: trace.payload.image, buttons: [] });
       } else if (trace.type === "choice" && trace.payload?.buttons) {
