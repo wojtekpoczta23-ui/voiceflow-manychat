@@ -5,10 +5,14 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post("/voiceflow", async (req, res) => {
-  console.log("📩 Request od ManyChat - FORMAT TEST v1");
+  console.log("📩 Request - TEST v2");
   return res.json({
-    messages: [{ type: "text", text: "Test v1 format - działa?" }],
-    actions: []
+    version: "v2",
+    content: {
+      messages: [{ type: "text", text: "Bot dziala! Test v2." }],
+      actions: [],
+      quick_replies: []
+    }
   });
 });
 
@@ -17,6 +21,4 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Serwer uruchomiony na porcie ${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Port ${PORT}`));
