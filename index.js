@@ -9,7 +9,7 @@ app.post("/voiceflow", async (req, res) => {
   return res.json({
     version: "v2",
     content: {
-      messages: [{ type: "text", text: "Bot dziala! Test v2." }],
+      messages: [{ type: "text", text: "Bot dziala! Test v2.", buttons: [] }],
       actions: [],
       quick_replies: []
     }
