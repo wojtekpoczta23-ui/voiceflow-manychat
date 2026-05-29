@@ -5,14 +5,9 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post("/voiceflow", async (req, res) => {
-  console.log("📩 TEST v2 format");
+  console.log("📩 Request received");
   return res.json({
-    version: "v2",
-    content: {
-      messages: [{ type: "text", text: "Bot dziala! Test v2.", buttons: [] }],
-      actions: [],
-      quick_replies: []
-    }
+    response: "Bot dziala! Test nowej metody."
   });
 });
 
