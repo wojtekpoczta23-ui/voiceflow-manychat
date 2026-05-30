@@ -1,13 +1,16 @@
-import express from "express";
 import axios from "axios";
-import bodyParser from "body-parser";
-
-const app = express();
-app.use(bodyParser.json());
 
 const VOICEFLOW_API_KEY = process.env.VOICEFLOW_API_KEY || "VF.DM.6a056807279e78698cdd13d0.7vc2cTUJ0V80eN64";
 
-app.post("/voiceflow", async (req, res) => {
+export default async function handler(req, res) {
+  if (req.method === "GET") {
+    return res.status(200).send("🟢 Bridge działa!");
+  }
+
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
   try {
     const userId = req.body.userId || "default_user";
     const userMessage = req.body.userMessage || "";
@@ -34,18 +37,12 @@ app.post("/voiceflow", async (req, res) => {
     }
 
     responseText = responseText.trim();
-    if (!responseText) responseText = "Przepraszam, spróbuj ponownie.";
+    if (!responseText) responseText = "Chwileczkę, napisz ponownie.";
     if (responseText.length > 1000) responseText = responseText.substring(0, 997) + "...";
 
-    return res.json({ response: responseText });
+    return res.status(200).json({ response: responseText });
 
   } catch (error) {
-    console.error("❌ Błąd:", error.message);
-    return res.json({ response: "Wystąpił błąd techniczny. Spróbuj za chwilę." });
+    return res.status(200).json({ response: "Wystąpił błąd techniczny. Spróbuj za chwilę." });
   }
-});
-
-app.get("/", (req, res) => res.send("🟢 Bridge działa!"));
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Port ${PORT}`));
+}
