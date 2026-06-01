@@ -10,7 +10,7 @@ async function sendToVoiceflow(userId, action) {
       headers: {
         Authorization: VOICEFLOW_API_KEY,
         "Content-Type": "application/json",
-        versionID: "6a1d4077bd2a8f7a1f752b67"
+        versionID: "6a1d4077bd2a8f7a1f752b68"
       }
     }
   );
